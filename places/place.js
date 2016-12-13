@@ -31,8 +31,19 @@ function getPlaceById(id) {
   return place;
 }
 
+function getPlaceByName(name) {
+  var place = null;
+  for(let i = 0; i < places.length; i++) {
+    if (places[ i ].name == name) {
+      place = places[ i ];
+    }
+  }
+  return place;
+}
+
 module.exports =  {
 	create,
 	getPlaces,
-	getPlaceById 
+	getPlaceById,
+  getPlaceByName 
 }

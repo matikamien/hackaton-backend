@@ -32,11 +32,11 @@ app.post('/places/:id', function (req, res) {
   res.send(JSON.stringify(newPlace));
 })
 
-//Para eliminar un refugio /places/:id
-app.delete('/places/:id', function (req, res) {
+//Para eliminar un refugio /places
+app.delete('/places', function (req, res) {
   var allPlaces = places.getPlaces();
-  var placeIdToDelete = req.params.id;
-  var place = places.getPlaceById(placeIdToDelete);
+  var placeNameToDelete = req.query.name;
+  var place = places.getPlaceByName(placeNameToDelete);
   if (place) {
   	var index = allPlaces.indexOf(place);
 
