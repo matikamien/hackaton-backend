@@ -2,6 +2,12 @@ var express = require('express');
 var places = require('./places/place');
 var app = express();
 
+app.use(function(req, res, next) { 
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 //Para ver todos los refugios.
 app.get('/places', function (req, res) {
   var allPlaces = places.getPlaces();  
