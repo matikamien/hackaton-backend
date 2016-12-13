@@ -9,13 +9,13 @@ app.use(function(req, res, next) {
 });
 
 //Para ver todos los refugios.
-app.get('/places', function (req, res) {
+app.get('/places', function (req, res, next) {
   var allPlaces = places.getPlaces();  
   res.send(JSON.stringify(allPlaces));
 })
 
 //Para ver refugio específicio /places/:id
-app.get('/places/:id', function (req, res) {
+app.get('/places/:id', function (req, res, next) {
   var allPlaces = places.getPlaces();
   var placeId = req.params.id;
   var place = places.getPlaceById(placeId);
@@ -27,7 +27,7 @@ app.get('/places/:id', function (req, res) {
 
 //Para crear un nuevo refugio.
 //Al crear un nuevo refugio se están pasando como parámetros del GET, y no en el Body.
-app.post('/places/:id', function (req, res) {
+app.post('/places/:id', function (req, res, next) {
   var placeId = req.params.id;
   var name = req.query.name;
   var description = req.query.description;
@@ -39,7 +39,7 @@ app.post('/places/:id', function (req, res) {
 })
 
 //Para eliminar un refugio /places
-app.delete('/places', function (req, res) {
+app.delete('/places', function (req, res, next) {
   var allPlaces = places.getPlaces();
   var placeNameToDelete = req.query.name;
   var place = places.getPlaceByName(placeNameToDelete);
