@@ -13,7 +13,6 @@ app.get('/places', function (req, res, next) {
 
 //Para obtener refugios más cercanos /nearest_places
 app.get('/nearest_places', function (req, res) {
-  var nearest_places = [];
   var min_distance = null;
   var min_distance_place = null;
   var allPlaces = places.getPlaces();
@@ -32,9 +31,8 @@ app.get('/nearest_places', function (req, res) {
       min_distance = distanceInMeters;
     }
   }
-  nearest_places.push(min_distance_place); 
   
-  res.send(JSON.stringify(nearest_places));  
+  res.send(JSON.stringify(min_distance_place));  
 })
 
 //Para crear un nuevo refugio.
