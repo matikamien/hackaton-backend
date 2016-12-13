@@ -14,6 +14,8 @@ app.get('/places', function (req, res, next) {
 //Para obtener refugios más cercanos /nearest_places
 app.get('/nearest_places', function (req, res) {
   var nearest_places = [];
+  var min_distance = null;
+  var min_distance_place = null;
   var allPlaces = places.getPlaces();
   
   var user_latitude = parseFloat(req.query.latitude);//.toString();
@@ -25,10 +27,12 @@ app.get('/nearest_places', function (req, res) {
     var place_ubication = {latitude: parseFloat(allPlaces[place].latitude), longitude: parseFloat(allPlaces[place].longitude)}
 
     var distanceInMeters = geolib.getDistance(user_ubication, place_ubication);
-    if (distanceInMeters < 1000) {
-      nearest_places.push(allPlaces[place]);
+    if (distanceInMeters < min_distance || min_distance == null) {
+      min_distance_place = allPlaces[place];
+      min_distance = distanceInMeters;
     }
   }
+  nearest_places.push(min_distance_place); 
   
   res.send(JSON.stringify(nearest_places));  
 })
