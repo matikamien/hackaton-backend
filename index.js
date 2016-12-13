@@ -3,11 +3,7 @@ var places = require('./places/place');
 var app = express();
 var geolib = require('geolib');
 
-app.use(function(req, res, next) { 
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+app.use(require('cors')());
 
 //Para ver todos los refugios.
 app.get('/places', function (req, res, next) {
@@ -16,7 +12,7 @@ app.get('/places', function (req, res, next) {
 })
 
 //Para obtener refugios más cercanos /nearest_places
-app.get('/nearest_places', function (req, res, next) {
+app.get('/nearest_places', function (req, res) {
   var nearest_places = [];
   var allPlaces = places.getPlaces();
   
@@ -39,7 +35,7 @@ app.get('/nearest_places', function (req, res, next) {
 
 //Para crear un nuevo refugio.
 //Al crear un nuevo refugio se están pasando como parámetros del GET, y no en el Body.
-app.post('/places', function (req, res, next) {
+app.post('/places', function (req, res) {
   var name = req.query.name;
   var description = req.query.description;
   var latitude = req.query.latitude;
@@ -50,7 +46,7 @@ app.post('/places', function (req, res, next) {
 })
 
 //Para eliminar un refugio /places
-app.delete('/places', function (req, res, next) {
+app.delete('/places', function (req, res) {
   var allPlaces = places.getPlaces();
   var placeIdToDelete = req.query.id;
   var place = places.getPlaceById(placeIdToDelete);
