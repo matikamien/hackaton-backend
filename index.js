@@ -48,7 +48,7 @@ app.delete('/places/:id', function (req, res) {
   res.status(404).send("No se encontro el refugio!");  
 })
 
-app.listen(3000, function () {
+app.listen(process.env.PORT || 3000, function () {
   console.log('Levantando servidor de refugios');
 })
 
