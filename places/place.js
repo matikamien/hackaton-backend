@@ -1,8 +1,8 @@
 var places = [];
 
 // Constructor
-function Place(id, name, description, latitude, longitude) {
-  this.id = id;
+function Place(name, description, latitude, longitude) {
+  this.id = generateId();
   this.name = name;
   this.description = description;
   this.latitude = latitude;
@@ -29,6 +29,14 @@ function getPlaceById(id) {
   	}
   }
   return place;
+}
+
+function generateId() {
+  if (places.length == 0) {
+    return 1;
+  } else {
+    return places[places.length-1].id + 1;
+  }
 }
 
 function getPlaceByName(name) {
