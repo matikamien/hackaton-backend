@@ -27,7 +27,7 @@ app.get('/nearest_places', function (req, res, next) {
 
   for(place in allPlaces) {
     var place_ubication = {latitude: parseFloat(allPlaces[place].latitude), longitude: parseFloat(allPlaces[place].longitude)}
-    
+
     var distanceInMeters = geolib.getDistance(user_ubication, place_ubication);
     if (distanceInMeters < 1000) {
       nearest_places.push(allPlaces[place]);
@@ -52,8 +52,8 @@ app.post('/places', function (req, res, next) {
 //Para eliminar un refugio /places
 app.delete('/places', function (req, res, next) {
   var allPlaces = places.getPlaces();
-  var placeNameToDelete = req.query.name;
-  var place = places.getPlaceByName(placeNameToDelete);
+  var placeIdToDelete = req.query.id;
+  var place = places.getPlaceById(placeIdToDelete);
   if (place) {
   	var index = allPlaces.indexOf(place);
 
